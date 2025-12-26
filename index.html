@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Penalty Master Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="stadium">
+        <div id="main-menu">
+            <h1 id="game-title">PENALTY PRO</h1>
+            
+            <div id="language-box">
+                <button class="menu-btn" onclick="setLanguage('ua')">УКРАЇНСЬКА 🇺🇦</button>
+                <button class="menu-btn" onclick="setLanguage('en')">ENGLISH 🇬🇧</button>
+            </div>
+
+            <div id="menu-initial" style="display:none">
+                <button class="menu-btn" id="btn-bot" onclick="showBotDifficulty()">ГРАТИ ПРОТИ БОТА</button>
+                <button class="menu-btn" id="btn-pvp" onclick="startPvP()">ГРАТИ 1 НА 1 (PvP)</button>
+            </div>
+
+            <div id="difficulty-box" style="display:none">
+                <p id="txt-diff">ОБЕРИ СКЛАДНІСТЬ:</p>
+                <button class="diff-btn easy" id="btn-easy" onclick="startBot('easy')">ЛЕГКО</button>
+                <button class="diff-btn medium" id="btn-medium" onclick="startBot('medium')">СЕРЕДНЬО</button>
+                <button class="diff-btn hard" id="btn-hard" onclick="startBot('hard')">ЛЕГЕНДА</button>
+            </div>
+        </div>
+
+        <div id="game-ui" style="display:none">
+            <div id="ui-header">
+                <div class="team-info"><span id="p1-name">P1</span>: <span id="score1">0</span></div>
+                <div id="attempts-bar"></div>
+                <div class="team-info"><span id="p2-name">P2</span>: <span id="score2">0</span></div>
+            </div>
+
+            <div id="goal-area">
+                <div id="goal">
+                    <div id="net"></div>
+                    <div id="goalkeeper">
+                        <div class="gk-head"></div>
+                        <div class="gk-body">
+                            <div class="gk-arm left"><div class="glove"></div></div>
+                            <div class="gk-arm right"><div class="glove"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="ball"></div>
+
+            <div id="action-screen">
+                <h2 id="turn-instruction"></h2>
+                <div id="controls">
+                    <button class="kick-btn" id="btn-left" onclick="handleChoice('left')">ВЛІВО</button>
+                    <button class="kick-btn" id="btn-center" onclick="handleChoice('center')">ЦЕНТР</button>
+                    <button class="kick-btn" id="btn-right" onclick="handleChoice('right')">ВПРАВО</button>
+                </div>
+                <div id="pass-screen" style="display:none">
+                    <p id="txt-pass">ДО УДАРУ</p>
+                    <button class="ready-btn" id="btn-ready" onclick="confirmReady()">ГОТОВИЙ</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="overlay" style="display:none">
+            <h1 id="winner-msg"></h1>
+            <button class="restart-btn" id="btn-restart" onclick="goToMenu()">В МЕНЮ</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
