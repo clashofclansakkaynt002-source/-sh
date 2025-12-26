@@ -1,0 +1,160 @@
+body { 
+    margin: 0; 
+    background: #222; 
+    font-family: 'Segoe UI', sans-serif; 
+    overflow: hidden; 
+    color: white; 
+    touch-action: manipulation; 
+    user-select: none; /* Заборона виділення тексту */
+}
+
+#stadium { 
+    position: relative; 
+    width: 100vw; 
+    height: 100vh; 
+    background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #2ecc71 50%, #27ae60 100%); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+/* Меню */
+#main-menu, #overlay { 
+    position: absolute; 
+    inset: 0; 
+    background: rgba(0,0,0,0.9); 
+    z-index: 100; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.menu-btn, .diff-btn, .ready-btn, .restart-btn { 
+    padding: 15px 30px; 
+    margin: 10px; 
+    border: none; 
+    border-radius: 10px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    font-size: 18px; 
+    width: 280px; 
+    text-transform: uppercase;
+    transition: transform 0.1s;
+}
+
+.menu-btn:active, .kick-btn:active { transform: scale(0.95); }
+
+.diff-btn.easy { background: #2ecc71; color: white; }
+.diff-btn.medium { background: #f39c12; color: white; }
+.diff-btn.hard { background: #e74c3c; color: white; }
+
+/* UI Гри */
+#game-ui { width: 100%; height: 100%; position: relative; }
+
+#ui-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 20px; 
+    background: rgba(0,0,0,0.6); 
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+
+.team-info { font-size: 1.2rem; font-weight: bold; min-width: 80px; text-align: center; }
+
+#attempts-bar { display: flex; gap: 8px; }
+.dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); background: #444; transition: 0.3s; }
+.dot.hit { background: #2ecc71; box-shadow: 0 0 10px #2ecc71; border-color: white; }
+.dot.miss { background: #e74c3c; box-shadow: 0 0 10px #e74c3c; border-color: white; }
+
+/* Ворота та Воротар */
+#goal-area {
+    position: absolute;
+    top: 20%; 
+    left: 50%; 
+    transform: translateX(-50%);
+    perspective: 800px;
+}
+
+#goal { 
+    width: 320px; 
+    height: 160px; 
+    border: 6px solid white; 
+    border-bottom: none; 
+    background: rgba(255,255,255,0.05); 
+    position: relative;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+#net {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(white 1px, transparent 0);
+    background-size: 10px 10px;
+    opacity: 0.3;
+}
+
+#goalkeeper { 
+    position: absolute; 
+    bottom: 0; 
+    left: 50%; 
+    /* Початкова точка центрування */
+    transform: translateX(-50%); 
+    width: 60px; 
+    height: 100px; 
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    z-index: 2;
+}
+
+.gk-head { width: 22px; height: 24px; background: #ffdbac; border-radius: 50%; margin: 0 auto; border: 1px solid #000; z-index: 3; position: relative;}
+.gk-body { width: 44px; height: 55px; background: #3498db; border-radius: 8px; margin: -2px auto 0; position: relative; z-index: 2; }
+.gk-arm { width: 10px; height: 35px; background: #3498db; position: absolute; top: 5px; transform-origin: top center; }
+.gk-arm.left { left: -8px; transform: rotate(20deg); }
+.gk-arm.right { right: -8px; transform: rotate(-20deg); }
+.glove { width: 14px; height: 16px; background: white; border-radius: 4px; position: absolute; bottom: -8px; left: -2px; border: 1px solid #ccc; }
+
+/* М'яч */
+#ball { 
+    position: absolute; 
+    bottom: 25%; 
+    left: 50%; 
+    transform: translateX(-50%) scale(1); 
+    width: 35px; 
+    height: 35px; 
+    border-radius: 50%; 
+    background: radial-gradient(circle at 35% 35%, #fff, #ddd 40%, #333 90%); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 5;
+}
+
+/* Управління */
+#action-screen { 
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.8)); 
+    padding: 25px 0 40px; 
+    text-align: center; 
+    border-radius: 20px 20px 0 0; 
+}
+
+#turn-instruction { margin: 0 0 20px; color: #f1c40f; font-size: 1.5rem; letter-spacing: 1px; }
+
+.kick-btn { 
+    padding: 20px 20px; 
+    margin: 5px; 
+    border-radius: 12px; 
+    border: none; 
+    font-weight: bold; 
+    background: white; 
+    color: #333;
+    min-width: 90px; 
+    font-size: 1rem;
+    box-shadow: 0 4px 0 #bbb;
+}
+.kick-btn:active { transform: translateY(4px); box-shadow: none; }
